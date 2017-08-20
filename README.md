@@ -1,2 +1,2 @@
 # WordWorm
-Thesaurus Alexa Skill
+
