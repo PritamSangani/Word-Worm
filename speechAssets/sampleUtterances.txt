@@ -1,0 +1,16 @@
+ThesaurusIntent what is another word for {queryword}
+ThesaurusIntent how else would I say {queryword}
+ThesaurusIntent what's a smart way to say {queryword}
+ThesaurusIntent what's another word for {queryword}
+ThesaurusIntent {queryword}
+ThesaurusIntent how else can I say {queryword}
+ThesaurusIntent what is a synonym for {queryword}
+ThesaurusIntent what's a synonym for {queryword}
+ThesaurusIntent a synonym for {queryword}
+ThesaurusIntent tell me a synonym for {queryword}
+ThesaurusIntent give me a synonym for {queryword}
+
+AMAZON.HelpIntent help
+AMAZON.HelpIntent help me
+AMAZON.StopIntent stop
+AMAZON.CancelIntent cancel

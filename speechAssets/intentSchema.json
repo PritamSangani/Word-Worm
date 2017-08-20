@@ -1,0 +1,22 @@
+{
+  "intents": [
+    {
+      "intent": "ThesaurusIntent",
+      "slots": [
+        {
+          "name": "queryword",
+          "type": "WORDS"
+        }
+      ]
+    },
+    {
+      "intent": "AMAZON.HelpIntent"
+    },
+    {
+      "intent": "AMAZON.StopIntent"
+    },
+    {
+      "intent": "AMAZON.CancelIntent"
+    }
+  ]
+}
