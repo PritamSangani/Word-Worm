@@ -91,9 +91,9 @@ exports.handler = function (event, context) {
 // --------------- Functions that control the skill"s behavior -----------------------
 
 function getWelcomeResponse(callback) {
-	var speechOutput = "Welcome to WordWorm. " + "I can find synonyms for words. " + "What word would you like a word for?" 
+	var speechOutput = "Welcome to Word Worm. " + "I can find synonyms for words. " + "What word would you like a synonym for?" 
 	var reprompt = "I can give you help if you are stuck. Just say help."
-	var header = "Welcome to WordWorm"
+	var header = "Welcome to Word Worm"
 	var shouldEndSession = false
 	var sessionAttributes = {
 		"speechOutput" : speechOutput,
@@ -108,15 +108,15 @@ function handleGetHelpResponse(intent, session, callback) {
     if (!session.attributes) {
     	session.attributes = {}
     }
-    var speechOutput = "To use WordWorm you should say a word that you would like a synonym for." + "I can only help you with single words. For example, say car not race car"
-    var reprompt = "Go ahead, say a word you would like a synonym for"
+    var speechOutput = "To use Word Worm you should say a word that you would like a synonym for. " + "I can only help you with single words. For example, say, car, not race car"
+    var reprompt = "Go ahead, say a word you would like a synonym for."
     var shouldEndSession = false
 
     callback(session.attributes, buildSpeechletResponseWithoutCard(speechOutput, reprompt, shouldEndSession))
 }
 
 function handleFinishSessionResponse(intent, session, callback) {
-	var speechOutput = "Goodbye! Thank you for using WordWorm. Have a great day!"
+	var speechOutput = "Goodbye! Thank you for using Word Worm. Have a great day!"
 	var reprompt = null
 	var shouldEndSession = true
 
@@ -253,21 +253,45 @@ function handleGetSynonymResponse(intent, session, callback) {
 			}
 
 			if (thesaurusResponse.hasOwnProperty("adjective")){
-				var adjectiveSynonyms = shuffleArray(thesaurusResponse.adjective.syn)
-				speechOutput += capitaliseFirst(queryword) + ", used as a verb, has the following synonyms: "
-				maxLength = Object.keys(adjectiveSynonyms).length
-				if (maxLength > 5)
-				{
-					maxLength = 5
-				}
 
-				for(var i = 0; i < maxLength; i++) {
-					if (i > 0){
-						speechOutput += " , "
+				speechOutput += capitaliseFirst(queryword) + ", used as an adjective, has the following synonyms: "
+				
+				if(thesaurusResponse.adjective.hasOwnProperty("syn")) {
+					var adjectiveSynonyms = shuffleArray(thesaurusResponse.adjective.syn)
+					maxLength = adjectiveSynonyms.length
+
+					if (maxLength > 5)
+					{
+						maxLength = 5
 					}
-					speechOutput +=  adjectiveSynonyms[i]
 
+					for(var i = 0; i < maxLength; i++) {
+						if (i > 0){
+							speechOutput += " , "
+						}
+						speechOutput +=  adjectiveSynonyms[i]
+
+					}
 				}
+
+				else {
+					var adjectiveSimilar = shuffleArray(thesaurusResponse.adjective.sim)
+					var maxLength1 = Object.keys(adjectiveSimilar).length
+					
+					if (maxLength1 > 5)
+					{
+						maxLength1 = 5
+					}
+
+					for(var j = 0; j < maxLength1; j++) {
+						if (j > 0){
+							speechOutput += " , "
+						}
+						speechOutput +=  adjectiveSimilar[j]
+
+					}
+				}
+				
 				speechOutput += ". "
 			}
 
