@@ -1,2 +1,2 @@
-# WordWorm
+# Word Worm
 
